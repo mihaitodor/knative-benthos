@@ -1,0 +1,10 @@
+input:
+  http_server:
+    path: /post
+
+pipeline:
+  processors:
+    - bloblang: "root = this.text.sentiment()"
+
+output:
+  sync_response: {}

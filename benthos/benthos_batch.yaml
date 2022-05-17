@@ -1,0 +1,42 @@
+input:
+  sql_select:
+    driver: postgres
+    dsn: postgres://postgres:password@localhost:5432/postgres?sslmode=disable
+    table: SOURCE
+    columns:
+      - "*"
+
+pipeline:
+  threads: 1
+  # threads: 6
+  processors:
+    - bloblang: root.text = this.text
+    - http:
+        url: http://benthos-vader.default.127.0.0.1.sslip.io/post
+        verb: POST
+
+output:
+  sql_insert:
+    driver: postgres
+    dsn: postgres://postgres:password@localhost:5432/postgres?sslmode=disable
+    table: SINK
+    columns:
+      - COMPOUND
+      - NEGATIVE
+      - NEUTRAL
+      - POSITIVE
+    args_mapping: |
+      root = [
+        this.Compound,
+        this.Negative,
+        this.Neutral,
+        this.Positive
+      ]
+    batching:
+      count: 40
+      period: 500ms
+
+metrics:
+  prometheus: {}
+
+shutdown_timeout: 3s

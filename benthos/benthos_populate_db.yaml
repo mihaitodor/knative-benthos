@@ -1,0 +1,27 @@
+input:
+  csv:
+    paths:
+      - Tweets.csv
+    parse_header_row: true
+    delimiter: ","
+    batch_count: 1
+    lazy_quotes: false
+
+output:
+  sql_insert:
+    driver: postgres
+    dsn: postgres://postgres:password@localhost:5432/postgres?sslmode=disable
+    table: SOURCE
+    columns:
+      - TEXT
+    args_mapping: |
+      root = [
+        this.text
+      ]
+    max_in_flight: 64
+    batching:
+      count: 100
+      byte_size: 0
+      period: "1s"
+      check: ""
+      processors: []
