@@ -1,5 +1,9 @@
 # Scalable sentiment analysis on Twitter data using Benthos and Knative
 
+Demo project for the KnativeCon Europe 2022 KubeCon EU co-located event.
+
+The talk recording is [here](https://www.youtube.com/watch?v=3OaRXwcRJJk&list=PLj6h78yzYM2Mv__LXlfzAAw5WMUTzIvS8) and the slides are [here](https://github.com/mihaitodor/Presentations/tree/master/knativecon_europe/2022-05-17).
+
 Based on Carlos Santana's Knative on Kind (KonK): https://github.com/csantanapr/knative-kind
 
 Benthos with sentiment analysis support: https://github.com/mihaitodor/benthos-vader
